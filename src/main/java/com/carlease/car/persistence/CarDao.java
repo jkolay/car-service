@@ -35,7 +35,7 @@ public class CarDao {
     private String version;
 
     @Column
-    private Integer noOfDoors;
+    private Integer numberOfDoors;
 
     @Column
     private Double co2Emission;
