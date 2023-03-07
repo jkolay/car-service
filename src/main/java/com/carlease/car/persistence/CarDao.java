@@ -49,6 +49,9 @@ public class CarDao {
     @Column
     private String status;
 
+    @Column
+    private Long mileage;
+
     @Column(updatable = false)
     @CreationTimestamp
     private LocalDateTime createdAt;

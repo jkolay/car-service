@@ -34,7 +34,7 @@ public class CarRequest {
     @NotNull(message = CarValidationMessageConfig.NUMBER_OF_DOORS_NOT_NULL)
     @Max(value = ValidationConstant.NUMBER_OF_DOORS_LENGTH, message = CarValidationMessageConfig.NUMBER_OF_DOORS_NOT_VALID)
     @Schema(description = "number of doors ", example = "5")
-    private Integer numberOFDoors;
+    private Integer numberOfDoors;
 
     @NotNull(message = CarValidationMessageConfig.C02_EMISSION_NOT_NULL)
     @Schema(description = "co2 emission", example = "")
@@ -47,6 +47,10 @@ public class CarRequest {
     @NotNull(message = CarValidationMessageConfig.NET_PRICE_NOT_NULL)
     @Schema(description = "The net price of the car", example = "135000")
     private Double netPrice;
+
+    @NotNull(message = CarValidationMessageConfig.MILEAGE_NOT_NULL)
+    @Schema(description = "The current mileage the car", example = "135000")
+    private Long mileage;
 
 
 

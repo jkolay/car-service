@@ -16,4 +16,7 @@ public class CarValidationMessageConfig {
     public static final String NUMBER_OF_DOORS_NOT_VALID = "Number of doors is not valid";
     public static final String VERSION_PATTERN_NOT_VALID = "Version pattern not valid";
 
+    public static final String MILEAGE_NOT_NULL ="Mileage can not be null" ;
+    public static final String STATUS_NOT_NULL = "Car Status can not be null";
+    public static final String STATUS_PATTERN_NOT_VALID = "values can be either Leased or Not-Leased";
 }

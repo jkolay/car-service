@@ -4,6 +4,7 @@ import com.carlease.car.mapper.CarMapper;
 import com.carlease.car.exception.CarException;
 import com.carlease.car.exception.CarNotFoundException;
 import com.carlease.car.model.request.CarRequest;
+import com.carlease.car.model.request.CarUpdateStatusRequestModel;
 import com.carlease.car.model.response.CarResponse;
 import com.carlease.car.persistence.CarDao;
 import com.carlease.car.repository.CarRepository;
@@ -81,5 +82,21 @@ public class CarServiceImpl implements CarService {
             throw new CarNotFoundException("Car details is not present for the car");
         }
 
+    }
+
+    @Override
+    public CarResponse updateCarStatus(Integer carId, CarUpdateStatusRequestModel updateStatusRequestModel) throws CarNotFoundException, CarException {
+        CarDao existingCarDao= carRepository.findByCarId(carId);
+        if(existingCarDao!=null){
+            if (updateStatusRequestModel.getStatus().equalsIgnoreCase("Leased") || updateStatusRequestModel.getStatus().equalsIgnoreCase("Not-Leased")) {
+
+                existingCarDao.setStatus(updateStatusRequestModel.getStatus());
+                return carMapper.mapCarDaoTOCarResponse(carRepository.save(existingCarDao));
+            }
+            throw new CarException("Car status can not be updated");
+        }
+        else {
+            throw new CarNotFoundException("Car details is not present for the car");
+        }
     }
 }

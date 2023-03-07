@@ -3,6 +3,7 @@ package com.carlease.car.service;
 import com.carlease.car.exception.CarException;
 import com.carlease.car.exception.CarNotFoundException;
 import com.carlease.car.model.request.CarRequest;
+import com.carlease.car.model.request.CarUpdateStatusRequestModel;
 import com.carlease.car.model.response.CarResponse;
 
 import java.util.List;
@@ -13,4 +14,6 @@ public interface CarService {
     public List<CarResponse> getCars(String status) throws CarException;
     public CarResponse getCarByCarId(Integer carId) throws CarNotFoundException;
     public void deleteCar(Integer carId) throws CarNotFoundException;
+
+    CarResponse updateCarStatus(Integer carId, CarUpdateStatusRequestModel updateStatusRequestModel) throws CarNotFoundException, CarException;
 }
