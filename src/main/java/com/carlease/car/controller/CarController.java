@@ -5,18 +5,15 @@ import com.carlease.car.exception.CarNotFoundException;
 import com.carlease.car.model.request.CarRequest;
 import com.carlease.car.model.request.CarUpdateStatusRequestModel;
 import com.carlease.car.model.response.CarResponse;
+import com.carlease.car.service.CarService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
-import jakarta.websocket.server.PathParam;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.carlease.car.service.CarService;
 
-import java.util.List;
 /** Car controller which consists of all the endpoints for car service */
 @RestController
 @RequestMapping(value = "api/v1/car")
