@@ -20,39 +20,41 @@ import java.util.ArrayList;
 @ExtendWith(MockitoExtension.class)
 public class CarControllerTest {
 
-    @Mock
-    private  CarService carService;
+  @Mock private CarService carService;
 
-    @InjectMocks
-    private CarController controller;
+  @InjectMocks private CarController controller;
 
-    @Test
-    public void createCarTest(){
-        Mockito.when(carService.createCar(Mockito.any(CarRequest.class))).thenReturn(new CarResponse());
-        Assertions.assertNotNull(controller.createCar(new CarRequest()));
-    }
+  @Test
+  public void createCarTest() {
+    Mockito.when(carService.createCar(Mockito.any(CarRequest.class))).thenReturn(new CarResponse());
+    Assertions.assertNotNull(controller.createCar(new CarRequest()));
+  }
 
-    @Test
-    public void updateCarTest() throws CarNotFoundException, CarException {
-        Mockito.when(carService.updateCar(Mockito.any(CarRequest.class),Mockito.anyInt())).thenReturn(new CarResponse());
-        Assertions.assertNotNull(controller.updateCar(new CarRequest(),1));
-    }
+  @Test
+  public void updateCarTest() throws CarNotFoundException, CarException {
+    Mockito.when(carService.updateCar(Mockito.any(CarRequest.class), Mockito.anyInt()))
+        .thenReturn(new CarResponse());
+    Assertions.assertNotNull(controller.updateCar(new CarRequest(), 1));
+  }
 
-    @Test
-    public void getCarsTest() throws CarException {
-        Mockito.when(carService.getCars(Mockito.anyString())).thenReturn(new ArrayList<>());
-        Assertions.assertNotNull(controller.getCars(CarStatus.ALL.getValue()));
-    }
+  @Test
+  public void getCarsTest() throws CarException {
+    Mockito.when(carService.getCars(Mockito.anyString())).thenReturn(new ArrayList<>());
+    Assertions.assertNotNull(controller.getCars(CarStatus.ALL.getValue()));
+  }
 
-    @Test
-    public void getCarByCarIdTest() throws CarNotFoundException {
-        Mockito.when(carService.getCarByCarId(Mockito.anyInt())).thenReturn(new CarResponse());
-        Assertions.assertNotNull(controller.getCarByCarId(1));
-    }
+  @Test
+  public void getCarByCarIdTest() throws CarNotFoundException {
+    Mockito.when(carService.getCarByCarId(Mockito.anyInt())).thenReturn(new CarResponse());
+    Assertions.assertNotNull(controller.getCarByCarId(1));
+  }
 
-    @Test
-    public void updateCarStatusTest() throws CarNotFoundException, CarException {
-        Mockito.when(carService.updateCarStatus(Mockito.anyInt(),Mockito.any(CarUpdateStatusRequestModel.class))).thenReturn(new CarResponse());
-        Assertions.assertNotNull(controller.updateCarStatus(1,new CarUpdateStatusRequestModel()));
-    }
+  @Test
+  public void updateCarStatusTest() throws CarNotFoundException, CarException {
+    Mockito.when(
+            carService.updateCarStatus(
+                Mockito.anyInt(), Mockito.any(CarUpdateStatusRequestModel.class)))
+        .thenReturn(new CarResponse());
+    Assertions.assertNotNull(controller.updateCarStatus(1, new CarUpdateStatusRequestModel()));
+  }
 }

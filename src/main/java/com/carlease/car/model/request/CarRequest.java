@@ -34,10 +34,12 @@ public class CarRequest {
     @Schema(description = "The version of the car", example = "2012")
     private String version;
 
-    @NotNull(message = CarValidationMessageConfig.NUMBER_OF_DOORS_NOT_NULL)
-    @Max(value = ValidationConstant.NUMBER_OF_DOORS_LENGTH, message = CarValidationMessageConfig.NUMBER_OF_DOORS_NOT_VALID)
-    @Schema(description = "number of doors ", example = "5")
-    private Integer numberOfDoors;
+  @NotNull(message = CarValidationMessageConfig.NUMBER_OF_DOORS_NOT_NULL)
+  @Max(
+      value = ValidationConstant.NUMBER_OF_DOORS_LENGTH,
+      message = CarValidationMessageConfig.NUMBER_OF_DOORS_NOT_VALID)
+  @Schema(description = "number of doors ", example = "5")
+  private Integer numberOfDoors;
 
     @NotNull(message = CarValidationMessageConfig.C02_EMISSION_NOT_NULL)
     @Schema(description = "co2 emission", example = "1.6")

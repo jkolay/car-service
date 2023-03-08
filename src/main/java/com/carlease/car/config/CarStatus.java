@@ -8,14 +8,10 @@ public enum CarStatus {
     NEW("Not-Leased"),
     LEASED("leased");
 
-    private String value;
+  private final String value;
 
     CarStatus(String value) {
         this.value = value;
-    }
-
-    public String getValue() {
-        return this.value;
     }
 
     public static CarStatus fromString(String value) {
@@ -25,5 +21,9 @@ public enum CarStatus {
             }
         }
         return null;
+    }
+
+    public String getValue() {
+        return this.value;
     }
 }

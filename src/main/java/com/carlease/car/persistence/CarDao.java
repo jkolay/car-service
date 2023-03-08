@@ -1,6 +1,7 @@
 package com.carlease.car.persistence;
 
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,11 +11,7 @@ import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import java.time.LocalDateTime;
-
-/**
- * Car Dao class
- */
+/** Car Dao class */
 @Entity
 @DynamicUpdate
 @Table(name = "car")
@@ -23,44 +20,33 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CarDao {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "incrementDomain")
-    @GenericGenerator(name = "incrementDomain", strategy = "increment")
-    private Integer carId;
+  @Id
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "incrementDomain")
+  @GenericGenerator(name = "incrementDomain", strategy = "increment")
+  private Integer carId;
 
-    @Column(nullable = false)
-    private String make;
+  @Column(nullable = false)
+  private String make;
 
-    @Column
-    private String model;
+  @Column private String model;
 
-    @Column
-    private String version;
+  @Column private String version;
 
-    @Column
-    private Integer numberOfDoors;
+  @Column private Integer numberOfDoors;
 
-    @Column
-    private Double co2Emission;
+  @Column private Double co2Emission;
 
-    @Column
-    private Double grossPrice;
+  @Column private Double grossPrice;
 
-    @Column
-    private Double netPrice;
+  @Column private Double netPrice;
 
-    @Column
-    private String status;
+  @Column private String status;
 
-    @Column
-    private Long mileage;
+  @Column private Long mileage;
 
-    @Column(updatable = false)
-    @CreationTimestamp
-    private LocalDateTime createdAt;
+  @Column(updatable = false)
+  @CreationTimestamp
+  private LocalDateTime createdAt;
 
-    @Column
-    @UpdateTimestamp
-    private LocalDateTime updatedAt;
+  @Column @UpdateTimestamp private LocalDateTime updatedAt;
 }
-

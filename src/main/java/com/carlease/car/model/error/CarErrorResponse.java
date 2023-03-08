@@ -7,13 +7,11 @@ import lombok.Setter;
 
 import java.util.List;
 
-/**
- * car Error response model class
- */
+/** car Error response model class */
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class CarErrorResponse {
-    private List<CarErrorModel> errors;
+  private List<CarErrorModel> errors;
 }

@@ -24,13 +24,12 @@ import java.util.List;
 
 @ExtendWith(MockitoExtension.class)
 public class CarServiceImplTest {
+    @InjectMocks
+    CarServiceImpl carService;
     @Mock
     private  CarRepository carRepository;
     @Mock
     private  CarMapper carMapper;
-
-    @InjectMocks
-    CarServiceImpl carService;
 
     @Test
     public void createCarTest(){

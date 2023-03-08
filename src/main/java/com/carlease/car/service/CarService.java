@@ -5,18 +5,21 @@ import com.carlease.car.exception.CarNotFoundException;
 import com.carlease.car.model.request.CarRequest;
 import com.carlease.car.model.request.CarUpdateStatusRequestModel;
 import com.carlease.car.model.response.CarResponse;
-
 import java.util.List;
 
-/**
- * the car service interface
- */
+/** the car service interface */
 public interface CarService {
-    public CarResponse createCar(CarRequest carRequest);
-    public CarResponse updateCar(CarRequest carRequest,Integer carId) throws CarNotFoundException, CarException;
-    public List<CarResponse> getCars(String status) throws CarException;
-    public CarResponse getCarByCarId(Integer carId) throws CarNotFoundException;
-    public void deleteCar(Integer carId) throws CarNotFoundException, CarException;
+  CarResponse createCar(CarRequest carRequest);
 
-    CarResponse updateCarStatus(Integer carId, CarUpdateStatusRequestModel updateStatusRequestModel) throws CarNotFoundException, CarException;
+  CarResponse updateCar(CarRequest carRequest, Integer carId)
+      throws CarNotFoundException, CarException;
+
+  List<CarResponse> getCars(String status) throws CarException;
+
+  CarResponse getCarByCarId(Integer carId) throws CarNotFoundException;
+
+  void deleteCar(Integer carId) throws CarNotFoundException, CarException;
+
+  CarResponse updateCarStatus(Integer carId, CarUpdateStatusRequestModel updateStatusRequestModel)
+      throws CarNotFoundException, CarException;
 }
