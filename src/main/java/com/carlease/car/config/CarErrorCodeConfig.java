@@ -1,5 +1,7 @@
 package com.carlease.car.config;
-
+/**
+ * Car error code constant class
+ */
 public class CarErrorCodeConfig {
     public static final String INVALID_INPUT = "001";
     public static final String DB_ERROR = "002";

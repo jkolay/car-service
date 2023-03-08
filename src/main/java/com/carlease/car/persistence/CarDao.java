@@ -12,6 +12,9 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
+/**
+ * Car Dao class
+ */
 @Entity
 @DynamicUpdate
 @Table(name = "car")

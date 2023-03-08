@@ -1,5 +1,8 @@
 package com.carlease.car.config;
 
+/**
+ * Car model validation message config class
+ */
 public class CarValidationMessageConfig {
     public static final String MAKE_NOT_NULL = "Car make can not be null";
 

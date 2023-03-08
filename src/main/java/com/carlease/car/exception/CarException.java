@@ -1,5 +1,8 @@
 package com.carlease.car.exception;
 
+/**
+ * the custom car exception class
+ */
 public class CarException extends Exception {
     public CarException() {
         super();

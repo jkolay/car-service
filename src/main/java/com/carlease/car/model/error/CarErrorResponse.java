@@ -7,6 +7,9 @@ import lombok.Setter;
 
 import java.util.List;
 
+/**
+ * car Error response model class
+ */
 @Getter
 @Setter
 @NoArgsConstructor

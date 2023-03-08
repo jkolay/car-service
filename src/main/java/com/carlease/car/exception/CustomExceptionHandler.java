@@ -34,16 +34,6 @@ import java.util.Map;
 @RestController
 public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 
-    
-    protected ResponseEntity<Object> handleExceptionInternal(Exception ex, @Nullable Object body, HttpHeaders headers, HttpStatus status, WebRequest request) {
-        if (HttpStatus.INTERNAL_SERVER_ERROR.equals(status)) {
-            request.setAttribute(WebUtils.ERROR_EXCEPTION_ATTRIBUTE, ex, WebRequest.SCOPE_REQUEST);
-        }
-
-        return new ResponseEntity(body, headers, status);
-    }
-
-
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
 
@@ -65,15 +55,14 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
 
-   
-
-    @ExceptionHandler(CarDuplicationException.class)
+    @ExceptionHandler(CarException.class)
     @ResponseBody
-    public ResponseEntity<Object> handleNotFoundException(CarDuplicationException ex) {
-        HttpStatus status = HttpStatus.BAD_REQUEST;
+    public ResponseEntity<Object> handleCarExceptionException(CarException ex) {
         final CarErrorModel error = new CarErrorModel(ex.getMessage(), CarErrorCodeConfig.INVALID_INPUT, ErrorSeverityLevelCodeType.ERROR);
-        return new ResponseEntity<>(error, status);
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
+
+
 
     @ExceptionHandler({IllegalArgumentException.class, InvalidDataAccessApiUsageException.class})
     @ResponseBody

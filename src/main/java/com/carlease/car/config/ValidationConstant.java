@@ -10,4 +10,5 @@ public class ValidationConstant {
     public static final int NUMBER_OF_DOORS_LENGTH = 6;
     public static final String PATTERN_MAKE = "^[a-zA-Z]+$";
     public static final String VERSION_PATTERN = "^[a-zA-Z0-9]+$";
+    public static final String PATTERN_MODEL = "^[a-zA-Z0-9]+$";
 }

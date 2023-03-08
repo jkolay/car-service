@@ -10,6 +10,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * Car status update model class
+ */
 @Getter
 @Setter
 @AllArgsConstructor

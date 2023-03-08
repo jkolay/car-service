@@ -9,6 +9,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * Car Request model class
+ */
 @Getter
 @Setter
 @AllArgsConstructor
@@ -16,19 +19,19 @@ import lombok.Setter;
 public class CarRequest {
     @NotBlank(message = CarValidationMessageConfig.MAKE_NOT_NULL)
     @Pattern(regexp = ValidationConstant.PATTERN_MAKE, message = CarValidationMessageConfig.MAKE_PATTERN_NOT_VALID)
-    @Schema(description = "The make of the Car", example = "")
+    @Schema(description = "The make of the Car", example = "Audi")
     private String make;
 
     @NotBlank(message = CarValidationMessageConfig.MODEL_NOT_NULL)
     @Size(max = ValidationConstant.MAX_LENGTH_MODEL, message = CarValidationMessageConfig.MODEL_SIZE_NOT_VALID)
-    @Pattern(regexp = ValidationConstant.PATTERN_MAKE, message = CarValidationMessageConfig.MODEL_PATTERN_NOT_VALID)
-    @Schema(description = "Model of the Car;", example = "")
+    @Pattern(regexp = ValidationConstant.PATTERN_MODEL, message = CarValidationMessageConfig.MODEL_PATTERN_NOT_VALID)
+    @Schema(description = "Model of the Car;", example = "X012")
     private String model;
 
     @NotBlank(message = CarValidationMessageConfig.VERSION_NOT_NULL)
     @Size(max = ValidationConstant.VERSION_LENGTH, message = CarValidationMessageConfig.VERSION__NOT_VALID)
     @Pattern(regexp = ValidationConstant.VERSION_PATTERN, message = CarValidationMessageConfig.VERSION_PATTERN_NOT_VALID)
-    @Schema(description = "The version of the car", example = "")
+    @Schema(description = "The version of the car", example = "2012")
     private String version;
 
     @NotNull(message = CarValidationMessageConfig.NUMBER_OF_DOORS_NOT_NULL)
@@ -37,7 +40,7 @@ public class CarRequest {
     private Integer numberOfDoors;
 
     @NotNull(message = CarValidationMessageConfig.C02_EMISSION_NOT_NULL)
-    @Schema(description = "co2 emission", example = "")
+    @Schema(description = "co2 emission", example = "1.6")
     private Double co2Emission;
 
     @NotNull(message = CarValidationMessageConfig.GROSS_PRICE_NOT_NULL)
@@ -49,7 +52,7 @@ public class CarRequest {
     private Double netPrice;
 
     @NotNull(message = CarValidationMessageConfig.MILEAGE_NOT_NULL)
-    @Schema(description = "The current mileage the car", example = "135000")
+    @Schema(description = "The current mileage the car", example = "15000")
     private Long mileage;
 
 

@@ -1,5 +1,8 @@
 package com.carlease.car.exception;
 
+/**
+ * Custom Exception class when the car is not found
+ */
 public class CarNotFoundException extends Exception{
     public CarNotFoundException() {
         super();

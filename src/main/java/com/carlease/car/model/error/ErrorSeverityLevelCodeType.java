@@ -1,5 +1,8 @@
 package com.carlease.car.model.error;
 
+/**
+ * Model for Error Severity Level
+ */
 public enum ErrorSeverityLevelCodeType {
     WARNING,
     ERROR,
