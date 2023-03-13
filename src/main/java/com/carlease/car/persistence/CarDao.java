@@ -40,7 +40,6 @@ public class CarDao {
 
   @Column private Double netPrice;
 
-  @Column private String status;
 
   @Column private Long mileage;
 

@@ -1,11 +1,9 @@
 package com.carlease.car.service.impl;
 
-import com.carlease.car.config.CarStatus;
 import com.carlease.car.exception.CarException;
 import com.carlease.car.exception.CarNotFoundException;
 import com.carlease.car.mapper.CarMapper;
 import com.carlease.car.model.request.CarRequest;
-import com.carlease.car.model.request.CarUpdateStatusRequestModel;
 import com.carlease.car.model.response.CarResponse;
 import com.carlease.car.persistence.CarDao;
 import com.carlease.car.repository.CarRepository;
@@ -40,7 +38,6 @@ public class CarServiceImpl implements CarService {
   @Override
   public CarResponse createCar(CarRequest carRequest) {
     CarDao carDao = carMapper.mapCarRequestToCarDao(carRequest);
-    carDao.setStatus(CarStatus.NEW.getValue());
     logger.info("New car details added.");
     return carMapper.mapCarDaoTOCarResponse(carRepository.save(carDao));
   }
@@ -58,47 +55,29 @@ public class CarServiceImpl implements CarService {
       throws CarNotFoundException, CarException {
     CarDao existingCarDao = carRepository.findByCarId(carId);
     if (existingCarDao != null) {
-      if (existingCarDao.getStatus().equalsIgnoreCase(CarStatus.NEW.getValue())) {
         CarDao carDao = carMapper.mapCarRequestToCarDao(carRequest);
         carDao.setCarId(existingCarDao.getCarId());
-        carDao.setStatus(existingCarDao.getStatus());
         carDao.setCreatedAt(existingCarDao.getCreatedAt());
         carDao.setUpdatedAt(LocalDateTime.now());
         logger.info("Car details has been updated");
         return carMapper.mapCarDaoTOCarResponse(carRepository.save(carDao));
-      } else {
-        logger.error("car is already leased");
-        throw new CarException("Car details can not be updated for leased cars");
       }
-    }
     throw new CarNotFoundException("Car details is not present for the car");
   }
   /**
    * this is the implementation to retrieve list of cars by providing status as All,Leased or
    * Not-Leased
    *
-   * @param status the status of the car
    * @return the list of car response
    * @throws CarException this gets thrown when the status of the car is not valid
    */
   @Override
-  public List<CarResponse> getCars(String status) throws CarException {
-    if (status.equalsIgnoreCase(CarStatus.ALL.getValue())) {
+  public List<CarResponse> getCars() throws CarException {
+
       logger.info("Retrieving all car details");
       return carRepository.findAll().stream()
           .map(carDao -> carMapper.mapCarDaoTOCarResponse(carDao))
           .collect(Collectors.toList());
-    } else if (status.equalsIgnoreCase(CarStatus.LEASED.getValue())
-        || status.equalsIgnoreCase(CarStatus.NEW.getValue())) {
-      logger.info("Retrieving car details for status {}", status);
-      return carRepository.findByStatus(status).stream()
-          .map(carDao -> carMapper.mapCarDaoTOCarResponse(carDao))
-          .collect(Collectors.toList());
-
-    } else {
-      logger.error("Incorrect status value provided for retrieval {}", status);
-      throw new CarException("Status value can be All, Leased, not-leased");
-    }
   }
   /**
    * this is the implementation to retrieve a car details
@@ -127,35 +106,6 @@ public class CarServiceImpl implements CarService {
     CarDao existingCarDao =
         Optional.of(carRepository.findByCarId(carId))
             .orElseThrow(() -> new CarNotFoundException("Car details is not present for the car"));
-    if (existingCarDao.getStatus().equalsIgnoreCase(CarStatus.NEW.getValue())) {
-      carRepository.delete(existingCarDao);
-    } else {
-      logger.error("Leased car details can not be deleted");
-      throw new CarException("Leased car details can not be deleted");
-    }
-  }
-  /**
-   * this is the implementation to update a car status
-   *
-   * @param carId the car id
-   * @param updateStatusRequestModel the new status of the car
-   * @return the updated car object
-   * @throws CarNotFoundException gets thrown when car is not found
-   * @throws CarException gets thrown when the car status is not valid
-   */
-  @Override
-  public CarResponse updateCarStatus(
-      Integer carId, CarUpdateStatusRequestModel updateStatusRequestModel)
-      throws CarNotFoundException, CarException {
-    CarDao existingCarDao =
-        Optional.of(carRepository.findByCarId(carId))
-            .orElseThrow(() -> new CarNotFoundException("Car details is not present for the car"));
-    if (updateStatusRequestModel.getStatus().equalsIgnoreCase(CarStatus.LEASED.getValue())
-        || updateStatusRequestModel.getStatus().equalsIgnoreCase(CarStatus.NEW.getValue())) {
-      logger.info("car status getting updated");
-      existingCarDao.setStatus(updateStatusRequestModel.getStatus());
-      return carMapper.mapCarDaoTOCarResponse(carRepository.save(existingCarDao));
-    }
-    throw new CarException("Car status can not be updated");
+    carRepository.delete(existingCarDao);
   }
 }

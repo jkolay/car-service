@@ -3,7 +3,6 @@ package com.carlease.car.controller;
 import com.carlease.car.exception.CarException;
 import com.carlease.car.exception.CarNotFoundException;
 import com.carlease.car.model.request.CarRequest;
-import com.carlease.car.model.request.CarUpdateStatusRequestModel;
 import com.carlease.car.model.response.CarResponse;
 import com.carlease.car.service.CarService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -48,7 +47,7 @@ public class CarController {
    * @throws CarException it gets thrown when the update request is for a leased car
    */
   @Operation(description = "update a car")
-  @RequestMapping(method = RequestMethod.PUT, value = "/{carId}")
+  @RequestMapping(method = RequestMethod.PUT, value = "/update/{carId}")
   @ResponseStatus(HttpStatus.CREATED)
   public ResponseEntity<CarResponse> updateCar(
       @Valid @RequestBody CarRequest carRequest, @PathVariable("carId") Integer carId)
@@ -60,16 +59,15 @@ public class CarController {
    * this is the endpoint implementation to retrieve list of cars by providing status as All,Leased
    * or Not-Leased
    *
-   * @param status the status of the car
    * @return the list of car response
    * @throws CarException this gets thrown when the status of the car is not valid
    */
-  @Operation(description = "retrieve list of cars by providing status as All,Leased or Not-Leased")
-  @RequestMapping(method = RequestMethod.GET, value = "/status/{status}")
+  @Operation(description = "retrieve list of cars")
+  @RequestMapping(method = RequestMethod.GET, value = "/retrieveAll")
   @ResponseStatus(HttpStatus.FOUND)
-  public ResponseEntity<List<CarResponse>> getCars(@PathVariable("status") String status)
+  public ResponseEntity<List<CarResponse>> getCars()
       throws CarException {
-    return ResponseEntity.ok(carService.getCars(status));
+    return ResponseEntity.ok(carService.getCars());
   }
 
   /**
@@ -80,12 +78,13 @@ public class CarController {
    * @throws CarNotFoundException gets thrown when car is not found
    */
   @Operation(description = "retrieve a car by car Id")
-  @RequestMapping(method = RequestMethod.GET, value = "/{carId}")
+  @RequestMapping(method = RequestMethod.GET, value = "/view/{carId}")
   @ResponseStatus(HttpStatus.FOUND)
   public ResponseEntity<CarResponse> getCarByCarId(@PathVariable("carId") Integer carId)
       throws CarNotFoundException {
     return ResponseEntity.ok(carService.getCarByCarId(carId));
   }
+
 
   /**
    * this is the endpoint implementation to delete a car
@@ -95,29 +94,12 @@ public class CarController {
    * @throws CarException gets thrown when car is leased
    */
   @Operation(description = "delete a car by car Id")
-  @RequestMapping(method = RequestMethod.DELETE, value = "/{carId}")
+  @RequestMapping(method = RequestMethod.DELETE, value = "/delete/{carId}")
   @ResponseStatus(HttpStatus.OK)
   public void deleteCar(@PathVariable("carId") Integer carId)
       throws CarNotFoundException, CarException {
     carService.deleteCar(carId);
   }
 
-  /**
-   * this is the endpoint implementation to update a car status
-   *
-   * @param carId the car id
-   * @param updateStatusRequestModel the new status of the car
-   * @return the updated car object
-   * @throws CarNotFoundException gets thrown when car is not found
-   * @throws CarException gets thrown when the car status is not valid
-   */
-  @Operation(description = "Update a car status by car Id")
-  @RequestMapping(method = RequestMethod.PUT, value = "/modify/status/{carId}")
-  @ResponseStatus(HttpStatus.OK)
-  public ResponseEntity<CarResponse> updateCarStatus(
-      @PathVariable("carId") Integer carId,
-      @Valid @RequestBody CarUpdateStatusRequestModel updateStatusRequestModel)
-      throws CarNotFoundException, CarException {
-    return ResponseEntity.ok(carService.updateCarStatus(carId, updateStatusRequestModel));
-  }
+
 }

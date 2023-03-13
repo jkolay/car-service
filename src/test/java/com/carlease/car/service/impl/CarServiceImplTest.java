@@ -1,11 +1,9 @@
 package com.carlease.car.service.impl;
 
-import com.carlease.car.config.CarStatus;
 import com.carlease.car.exception.CarException;
 import com.carlease.car.exception.CarNotFoundException;
 import com.carlease.car.mapper.CarMapper;
 import com.carlease.car.model.request.CarRequest;
-import com.carlease.car.model.request.CarUpdateStatusRequestModel;
 import com.carlease.car.model.response.CarResponse;
 import com.carlease.car.persistence.CarDao;
 import com.carlease.car.repository.CarRepository;
@@ -17,7 +15,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +49,6 @@ public class CarServiceImplTest {
         Mockito.when(carRepository.findByCarId(Mockito.anyInt())).thenReturn(existingCarDao);
         Mockito.when(carMapper.mapCarRequestToCarDao(Mockito.any(CarRequest.class))).thenReturn(carDao);
         Mockito.when(existingCarDao.getCarId()).thenReturn(1);
-        Mockito.when(existingCarDao.getStatus()).thenReturn(CarStatus.NEW.getValue());
         Mockito.when(existingCarDao.getCreatedAt()).thenReturn(LocalDateTime.now());
         Mockito.when(carRepository.save(Mockito.any(CarDao.class))).thenReturn(carDao);
         Mockito.when( carMapper.mapCarDaoTOCarResponse(Mockito.any(CarDao.class))).thenReturn(carResponse);
@@ -73,7 +69,7 @@ public class CarServiceImplTest {
         Mockito.when(carRepository.findAll()).thenReturn(carDaoList);
         Mockito.when( carMapper.mapCarDaoTOCarResponse(Mockito.any(CarDao.class))).thenReturn(carResponse);
 
-        Assertions.assertNotNull(carService.getCars(CarStatus.ALL.getValue()));
+        Assertions.assertNotNull(carService.getCars());
     }
 
     @Test
@@ -86,27 +82,7 @@ public class CarServiceImplTest {
 
     }
 
-    @Test
-    public void deleteCarTestWithException(){
-        CarDao carDao = Mockito.mock(CarDao.class);
 
-        Mockito.when(carRepository.findByCarId(Mockito.anyInt())).thenReturn(carDao);
-        Mockito.when(carDao.getStatus()).thenReturn(CarStatus.LEASED.getValue());
-        Assertions.assertThrows(CarException.class,()->carService.deleteCar(1));
-
-    }
-
-    @Test
-    public void updateCarStatusTest() throws CarNotFoundException, CarException {
-        CarDao existingCarDao = Mockito.mock(CarDao.class);
-        CarResponse carResponse=Mockito.mock(CarResponse.class);
-        Mockito.when(carRepository.findByCarId(Mockito.anyInt())).thenReturn(existingCarDao);
-        Mockito.when(carRepository.save(Mockito.any(CarDao.class))).thenReturn(existingCarDao);
-        Mockito.when( carMapper.mapCarDaoTOCarResponse(Mockito.any(CarDao.class))).thenReturn(carResponse);
-
-        Assertions.assertNotNull(carService.updateCarStatus(1,new CarUpdateStatusRequestModel(CarStatus.NEW.getValue())));
-
-    }
 
 
 }

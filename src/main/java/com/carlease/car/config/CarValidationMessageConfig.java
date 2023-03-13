@@ -20,4 +20,9 @@ public class CarValidationMessageConfig {
   public static final String MILEAGE_NOT_NULL = "Mileage can not be null";
   public static final String STATUS_NOT_NULL = "Car Status can not be null";
   public static final String STATUS_PATTERN_NOT_VALID = "values can be either Leased or Not-Leased";
+  public static final String USER_NAME_NOT_NULL = "User Name can not be blank";
+  public static final String EMAIL_NOT_NULL = "Email can not be blank";
+  public static final String MOBILE_NOT_NULL = "mobile number can not be blank";
+  public static final String PASSWORD_NOT_NULL = "password can not be blank";
+  public static final String ROLE_NOT_NULL = "Role can not be blank";
 }

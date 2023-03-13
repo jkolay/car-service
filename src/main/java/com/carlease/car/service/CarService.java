@@ -14,12 +14,10 @@ public interface CarService {
   CarResponse updateCar(CarRequest carRequest, Integer carId)
       throws CarNotFoundException, CarException;
 
-  List<CarResponse> getCars(String status) throws CarException;
+  List<CarResponse> getCars() throws CarException;
 
   CarResponse getCarByCarId(Integer carId) throws CarNotFoundException;
 
   void deleteCar(Integer carId) throws CarNotFoundException, CarException;
 
-  CarResponse updateCarStatus(Integer carId, CarUpdateStatusRequestModel updateStatusRequestModel)
-      throws CarNotFoundException, CarException;
 }

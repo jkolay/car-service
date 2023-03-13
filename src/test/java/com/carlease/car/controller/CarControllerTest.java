@@ -1,10 +1,8 @@
 package com.carlease.car.controller;
 
-import com.carlease.car.config.CarStatus;
 import com.carlease.car.exception.CarException;
 import com.carlease.car.exception.CarNotFoundException;
 import com.carlease.car.model.request.CarRequest;
-import com.carlease.car.model.request.CarUpdateStatusRequestModel;
 import com.carlease.car.model.response.CarResponse;
 import com.carlease.car.service.CarService;
 import org.junit.jupiter.api.Assertions;
@@ -39,8 +37,8 @@ public class CarControllerTest {
 
   @Test
   public void getCarsTest() throws CarException {
-    Mockito.when(carService.getCars(Mockito.anyString())).thenReturn(new ArrayList<>());
-    Assertions.assertNotNull(controller.getCars(CarStatus.ALL.getValue()));
+    Mockito.when(carService.getCars()).thenReturn(new ArrayList<>());
+    Assertions.assertNotNull(controller.getCars());
   }
 
   @Test
@@ -49,12 +47,5 @@ public class CarControllerTest {
     Assertions.assertNotNull(controller.getCarByCarId(1));
   }
 
-  @Test
-  public void updateCarStatusTest() throws CarNotFoundException, CarException {
-    Mockito.when(
-            carService.updateCarStatus(
-                Mockito.anyInt(), Mockito.any(CarUpdateStatusRequestModel.class)))
-        .thenReturn(new CarResponse());
-    Assertions.assertNotNull(controller.updateCarStatus(1, new CarUpdateStatusRequestModel()));
-  }
+
 }

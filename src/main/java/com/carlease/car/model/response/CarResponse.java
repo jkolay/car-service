@@ -29,8 +29,6 @@ public class CarResponse {
 
   private Double grossPrice;
 
-  private String status;
-
   private Long mileage;
 
   private LocalDateTime createdAt;
